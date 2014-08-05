@@ -3,6 +3,7 @@
 # See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
 # a list of version numbers.
 FROM phusion/baseimage:0.9.12
+MAINTAINER Truc Nguyen <truc.nguyen@bonitasoft.com>
 
 # Set correct environment variables.
 ENV HOME /root
