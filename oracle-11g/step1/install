@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mount -t tmpfs shmfs -o size=4g /dev/shm
+
+date
+echo "Installing database..."
+su - oracle -c "cd /tmp/install/database/ && ./runInstaller -ignoreSysPrereqs -ignorePrereq -noconfig -silent -waitforcompletion -responseFile /tmp/install/db_install.rsp"
+echo ""
+
+date
+echo "Finishing configuration..."
+$ORACLE_HOME/root.sh
+echo ""
+
+date
+echo "Done! Commit the container now."
+

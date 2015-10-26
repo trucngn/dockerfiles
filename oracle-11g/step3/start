@@ -1,0 +1,23 @@
+#!/bin/bash
+
+mount -t tmpfs shmfs -o size=4g /dev/shm
+
+while true; do
+  status=`ps -ef | grep tns | grep oracle | grep -v grep`
+  pmon=`ps -ef | egrep pmon_$ORACLE_SID'\>' | grep -v grep`
+  if [ "$status" == "" ] || [ "$pmon" == "" ]
+  then
+    su - oracle -c "lsnrctl start"
+    su - oracle -c "sqlplus /nolog @?/config/scripts/startdb.sql"
+    su - oracle -c "lsnrctl status"
+  fi
+
+  dbconsole=`ps -ef | grep "emwd.pl dbconsole" | grep -v grep`
+  if [ "$dbconsole" == "" ]
+  then
+    su - oracle -c "emctl start dbconsole"
+  fi
+
+  sleep 1m
+done;
+
