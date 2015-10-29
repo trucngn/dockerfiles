@@ -16,7 +16,7 @@ RUN apt-get install -y software-properties-common python-software-properties
 RUN \
   echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   add-apt-repository -y ppa:webupd8team/java && \
-  sed -i 's/wheezy/trusty/g' /etc/apt/sources.list.d/webupd8team-java-wheezy.list && \
+  sed -i 's/jessie/trusty/g' /etc/apt/sources.list.d/webupd8team-java-jessie.list && \
   apt-get update && \
   apt-get install -y oracle-java7-installer && \
   rm -rf /var/lib/apt/lists/* && \
@@ -32,7 +32,7 @@ RUN \
   apt-get install -y --force-yes sonar
 
 # DB schema creation
-ADD 01_setup-sonarqube-schema.sh /docker-entrypoint-initdb.d/
+ADD 01_setup-sonarqube-schema.sql /docker-entrypoint-initdb.d/
 
 # Sonar setup
 ADD 02_setup-sonarqube.sh /docker-entrypoint-initdb.d/
