@@ -9,4 +9,6 @@
 
 ## Docker run example
 
+The container will import the first `.ldif` file found in `/ldif` volume when starting.
+
 `$> docker run -d --name ldap-server -e LDAP_BASEDN="dc=acme,dc=com" -e LDAP_PASSWORD=secret-password -v /host/path/to/ldif:/ldif -p 389:389 tnguyen1/ldap-opends`
