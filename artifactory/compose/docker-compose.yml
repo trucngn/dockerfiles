@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  artapp:
+    image: tnguyen1/artifactory-oss:4.7.6
+    volumes:
+      - ./volumes/artifactory/data:/opt/artifactory/current/data
+      - ./volumes/artifactory/logs:/opt/artifactory/current/logs
+      - ./volumes/artifactory/backup:/opt/artifactory/current/backup
+    links: ["artdb"]
+    ports: ["8081:8081"]
+
+  artdb:
+    image: postgres:9.5
+    environment:
+      - DB_NAME=artifactory
+      - DB_USER=artifactory
+      - DB_PASSWORD=Artifactory12
+    volumes:
+      - ./postgres-initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/postgres/data:/var/lib/postgresql/data
+    expose: ["5432"]
+
