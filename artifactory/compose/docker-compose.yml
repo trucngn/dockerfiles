@@ -2,7 +2,7 @@ version: '2'
 
 services:
   artapp:
-    image: tnguyen1/artifactory-oss:4.7.6
+    image: tnguyen1/artifactory-with-postgres:4.7.6
     volumes:
       - ./volumes/artifactory/data:/opt/artifactory/current/data
       - ./volumes/artifactory/logs:/opt/artifactory/current/logs
